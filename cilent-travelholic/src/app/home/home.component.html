@@ -1,0 +1,47 @@
+<br><br><br><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div *ngFor="let post of posts" class="card">
+            <div class="card-body">
+                <blockquote class="blockquote">
+                    <p class="h2">{{post.title}}</p>
+                    <footer class="text-muted">{{post.description}}</footer>
+                    <footer class="text-muted"> Od {{post.start}} do {{post.end}}</footer>
+                    <footer class="text-muted"> {{post.city.name}} , {{post.city.country.name}} </footer>
+                    <footer class="text-muted"> <a href="#">{{post.user.firstName}} {{post.user.lastName}} </a>
+                    </footer>
+                </blockquote>
+                <div *ngFor="let comm of post.comments">
+
+                    <div class="form-inline">
+                        <div class="form-group col-md-9">
+                            <footer class="blockquote-footer">
+                                {{ comm.text }} <a href="#">{{ comm.user.firstName }}
+                                    {{ comm.user.lastName }}</a>
+                            </footer>
+                        </div>
+
+
+                        <div *ngIf="comm.user.username === username" class="form-group col-md-3">
+                            <i class="now-ui-icons ui-1_simple-remove" (click)="removeComm(comm.id)"></i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <form [formGroup]="commentForm">
+                    <div class="form-inline">
+                        <div class="form-group col-md-9">
+                            <input type="text" class="form-control" id="inputComm" placeholder="Comment"
+                                formControlName="text">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button type="submit" class="btn btn-primary btn-round"
+                                (click)="addComment(post.id)">Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

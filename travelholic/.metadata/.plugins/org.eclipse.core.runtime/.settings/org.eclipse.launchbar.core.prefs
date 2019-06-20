@@ -1,0 +1,10 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:ASTFrame,org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication,org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication (1),org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication (2),org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication (3)
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:ASTFrame/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:ASTFrame/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication\ (2)/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:TravelholicApplication/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

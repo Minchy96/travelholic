@@ -1,0 +1,9 @@
+package pmf.mina.bjelica.travelholic.service;
+
+import pmf.mina.bjelica.travelholic.model.entity.Post;
+
+public interface PostService {
+
+	Post getPost(int id);
+
+}
