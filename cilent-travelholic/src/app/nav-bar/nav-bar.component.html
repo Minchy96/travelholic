@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary fixed-top" color-on-scroll="500">
+<nav class="navbar navbar-expand-lg bg-primary fixed-top">
     <div class="container">
       <div class="dropdown button-dropdown">
         <div ngbDropdown>
@@ -9,7 +9,7 @@
           </a>
            <div ngbDropdownMenu>
              <a class="dropdown-header">Profile</a>
-             <a class="dropdown-item" href="#">View Profile</a>
+             <a class="dropdown-item" (click)="profileRouter()">View Profile</a>
              <a class="dropdown-item" href="#">Edit Profile</a>
             <!-- <a class="dropdown-item" href="#">Something else here</a>
              <div class="dropdown-divider"></div>
@@ -29,7 +29,7 @@
                   </a>
               </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="../home" >
+                    <a class="nav-link" (click)="homeRouter()">
                       <i class="now-ui-icons files_paper"></i>
                       <p>Home</p>
                     </a>

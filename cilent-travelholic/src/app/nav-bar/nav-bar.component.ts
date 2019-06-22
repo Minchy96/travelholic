@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-nav-bar',
@@ -10,7 +11,8 @@ export class NavBarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element : ElementRef) {
+    constructor(public location: Location, private element : ElementRef,
+        private router : Router) {
         this.sidebarVisible = false;
     }
 
@@ -45,13 +47,11 @@ export class NavBarComponent implements OnInit {
         }
     };
   
-    isDocumentation() {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
-        if( titlee === '/documentation' ) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    profileRouter(){
+        this.router.navigate(["profile"]);
+    }
+
+    homeRouter(){
+        this.router.navigate(["home"]);
     }
 }

@@ -39,6 +39,6 @@
 <fullyQualifiedTypeName name="pmf.mina.bjelica.travelholic.dao.PostRepository"/>
 <fullyQualifiedTypeName name="pmf.mina.bjelica.travelholic.model.entity.User"/>
 <fullyQualifiedTypeName name="pmf.mina.bjelica.travelholic.model.entity.Post"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 </qualifiedTypeNameHistroy>

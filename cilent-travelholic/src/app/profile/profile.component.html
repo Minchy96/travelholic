@@ -1,3 +1,99 @@
-<p>
-  profile works!
-</p>
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="orange">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+            style="background-image: url('assets/img/bg5.jpg') ;">
+        </div>
+        <div class="container">
+            <div class="content-center">
+
+                <h1 class="title">{{user?.firstName}} {{user?.lastName}}</h1>
+                <p class="category">zanimanje ?!</p>
+                <div class="content">
+                    <div class="social-description">
+
+                        <p>Posts </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="button-container">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Add Post
+                </button>
+
+                <button type="button" class="btn btn-primary">
+                    Edit Profile
+                </button>
+
+                <button type="button" class="btn btn-primary">
+                    See Posts
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h3 class="title">About me</h3>
+            <h5 class="description">{{ user?.caption  }}</h5>
+            <h3 class="title">Date of birth</h3>
+            <h5 class="description">{{ user?.birthDate  }}</h5>
+            <h3 class="title">Email Address</h3>
+            <h5 class="description">{{ user?.email  }}</h5>
+            <h3 class="title">Address</h3>
+            <h5 class="description">{{ user?.address  }}</h5> <br>
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">New Post</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="email" class="form-control" id="titlePost" placeholder="Title">
+                                <textarea class="form-control" aria-label="With textarea"
+                                    placeholder="Description..."></textarea> <br>
+
+                                <div class="form-inline">
+                                    <div class="form-group col-md-6">
+                                        Start: <input class="form-control datetimepicker" placeholder="06/07/2019"
+                                            name="dp1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        End: <input class="form-control datetimepicker" placeholder="06/07/2019"
+                                            name="dp2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+                                    </div>
+                                </div><br>
+
+                                <input type="email" class="form-control" id="titlePost" placeholder="City"> <br>
+                                <input type="email" class="form-control" id="titlePost" placeholder="Zipcode"><br>
+                                <input type="email" class="form-control" id="titlePost" placeholder="Counrty">
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Add post</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

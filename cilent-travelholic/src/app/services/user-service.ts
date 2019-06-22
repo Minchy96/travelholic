@@ -32,6 +32,19 @@ export class UserService {
 
             });
         });
+    }
+
+    getUserByUsername(){
+        let url = environment.backendUrl+"user/get/laura123"//+this.username;
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
       
     }
 
