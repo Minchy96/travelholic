@@ -1,0 +1,57 @@
+package pmf.mina.bjelica.travelholic.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import pmf.mina.bjelica.travelholic.model.dto.PostDto;
+import pmf.mina.bjelica.travelholic.model.dto.UserDto;
+import pmf.mina.bjelica.travelholic.model.entity.Post;
+import pmf.mina.bjelica.travelholic.service.PostService;
+
+@Controller
+@RequestMapping("/post")
+@CrossOrigin(origins = "http://localhost:4200")
+public class PostApi {
+	
+	@Autowired
+	PostService postService;
+	
+	@RequestMapping(method = RequestMethod.GET, value="/get/{idPost}")
+	public ResponseEntity<?> getPost(@PathVariable Integer idPost) {
+		System.out.println("usao");
+		
+		Post post = postService.getPost(idPost);
+		
+		return new ResponseEntity<Object>(post,HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/getAll")
+	public ResponseEntity<?> getAllPosts() {
+		System.out.println("usao");
+		
+		List<Post> posts = postService.getAll();
+		
+		return new ResponseEntity<Object>(posts,HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/save")
+	public ResponseEntity<?> savePost(@RequestBody PostDto postDto) {
+		System.out.println("usao");
+		
+		Post post = postService.save(postDto);
+		
+		return new ResponseEntity<Object>(post,HttpStatus.OK);
+	}
+	
+	
+
+}

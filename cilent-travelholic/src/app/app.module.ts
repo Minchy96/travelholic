@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { LoginComponent } from './login/login.component';
+import { AboutComponent } from './profile/about/about.component';
+import { SeePostsComponent } from './profile/see-posts/see-posts.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     CreatePostComponent,
     LoginComponent,
+    AboutComponent,
+    SeePostsComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserAnimationsModule,

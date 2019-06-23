@@ -8,6 +8,7 @@ export class UserDto {
     username : String
     password : String
     caption : String
+    newUsername : String
 
     constructor(){}
 

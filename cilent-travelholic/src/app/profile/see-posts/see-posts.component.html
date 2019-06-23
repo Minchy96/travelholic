@@ -1,0 +1,73 @@
+<div *ngIf="posts">
+    <div *ngFor="let post of posts" class="card">
+        <div class="card-body">
+            <blockquote class="blockquote">
+                <p class="h2">{{post?.title}}</p>
+                <footer class="text-muted">{{post?.description}}</footer>
+                <footer class="text-muted">{{post?.amount}} e </footer>
+                <footer class="text-muted"> Od {{post?.start}} do {{post?.end}}</footer>
+                <footer class="text-muted"> {{post?.city.name}} , {{post?.city.country.name}} </footer>
+                <footer class="text-muted"> <a href="#">{{post.user?.firstName}} {{post?.user.lastName}} </a>
+                </footer>
+            </blockquote>
+            <div *ngFor="let comm of post.comments">
+
+                <div class="form-inline">
+                    <div class="form-group col-md-9">
+                        <footer class="blockquote-footer">
+                            {{ comm?.text }} <a href="#">{{ comm?.user.firstName }}
+                                {{ comm?.user.lastName }}</a>
+                        </footer>
+                    </div>
+
+
+                    <i class="now-ui-icons ui-1_simple-remove" (click)="removeComm(comm.id)"></i>
+
+                </div>
+
+            </div>
+            <form [formGroup]="commentForm">
+                <div class="form-inline">
+                    <div class="form-group col-md-9">
+                        <input type="text" class="form-control" id="inputComm" placeholder="Comment"
+                            formControlName="text">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button type="submit" class="btn btn-primary btn-round"
+                            (click)="addComment(post.id)">Comment</button>
+                    </div>
+                </div>
+            </form>
+        
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            (click)="deletePost(post.id)" >
+                Delete
+            </button>
+
+          
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure?
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" (click)="deletePost(post.id)" 
+                            data-dismiss="modal">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+</div>

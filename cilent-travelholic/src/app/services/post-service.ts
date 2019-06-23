@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { CommentDto } from '../model/comment-dto';
+import { PostDto } from '../model/post-dto';
 
 
 @Injectable({
@@ -41,6 +42,43 @@ export class PostService {
 
     deleteComment(commentId : number){
         let url = environment.backendUrl + "comment/delete/"+commentId;
+        return new Observable((o: any) => {
+            this.http.delete(url, {} ).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+            });
+        });
+    }
+
+    savePost(postDto : PostDto){
+        let url = environment.backendUrl + "post/save";
+        return new Observable((o: any) => {
+            this.http.post(url,postDto ).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+            });
+        });
+    }
+
+    getUsersPosts(username : String){
+        let url = environment.backendUrl + "post/get/"+username;
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
+    }
+
+    deletePost(postId : number){
+        let url = environment.backendUrl + "post/delete/"+postId;
         return new Observable((o: any) => {
             this.http.delete(url, {} ).subscribe((data) => {
                 o.next(data);

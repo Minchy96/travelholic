@@ -1,0 +1,83 @@
+package pmf.mina.bjelica.travelholic.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pmf.mina.bjelica.travelholic.dao.CityRepo;
+import pmf.mina.bjelica.travelholic.dao.CountryRepo;
+import pmf.mina.bjelica.travelholic.dao.PostRepository;
+import pmf.mina.bjelica.travelholic.dao.UserRepository;
+import pmf.mina.bjelica.travelholic.model.dto.PostDto;
+import pmf.mina.bjelica.travelholic.model.entity.City;
+import pmf.mina.bjelica.travelholic.model.entity.Country;
+import pmf.mina.bjelica.travelholic.model.entity.Post;
+import pmf.mina.bjelica.travelholic.model.entity.User;
+
+@Service
+public class PostServiceImpl implements PostService {
+
+	@Autowired
+	private PostRepository postRepo;
+
+	@Autowired
+	private CountryRepo countryRepo;
+
+	@Autowired
+	private CityRepo cityRepo;
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@Override
+	public Post getPost(int id) {
+		return postRepo.findById(id).get();
+	}
+
+	@Override
+	public List<Post> getAll() {
+		return postRepo.findAll();
+	}
+
+	@Override
+	public Post save(PostDto postDto) {
+		Post post = new Post();
+
+		Country country = new Country();
+		country.setName(postDto.getCountry());
+		country = countryRepo.findCountryByName(postDto.getCountry());
+		if (country == null)
+			country = countryRepo.save(country);
+
+		City city = cityRepo.findCityByName(postDto.getCity());
+		if (city == null) {
+			city = new City();
+			city.setCountry(country);
+			city.setName(postDto.getCity());
+			city.setZipcode(postDto.getZipcode());
+			city = cityRepo.save(city);
+		}
+		post.setCity(city);
+
+		post.setDescription(postDto.getDescription());
+		post.setEnd(postDto.getEnd());
+		post.setStart(postDto.getStart());
+		post.setTitle(postDto.getTitle());
+		post.setAmount(postDto.getAmount());
+
+		User user = userRepo.findUserByUsername(postDto.getUsername());
+		System.out.println(user.getUsername()+"eeeeeeeeeeeeee");
+		post.setUser(user);
+
+		return postRepo.save(post);
+	}
+
+	@Override
+	public List<Post> getPosts(String username) {
+		User user = userRepo.findUserByUsername(username);
+		List<Post> posts = postRepo.findByUser(user);
+		return null;
+	}
+
+}

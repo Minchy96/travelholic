@@ -1,0 +1,27 @@
+package pmf.mina.bjelica.travelholic.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pmf.mina.bjelica.travelholic.dao.PostRepository;
+import pmf.mina.bjelica.travelholic.model.entity.Post;
+
+@Service
+public class PostServiceImpl implements PostService {
+	
+	@Autowired
+	private PostRepository postRepo;
+	
+	@Override
+	public Post getPost(int id) {
+		return postRepo.findById(id).get();
+	}
+
+	@Override
+	public List<Post> getAll() {
+		return postRepo.findAll();
+	}
+
+}

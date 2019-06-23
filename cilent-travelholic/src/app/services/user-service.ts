@@ -13,7 +13,8 @@ export class UserService {
 
     username : String
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+     }
 
     saveUser(userDto : UserDto){
         let url = environment.backendUrl+"user/save";
@@ -35,7 +36,7 @@ export class UserService {
     }
 
     getUserByUsername(){
-        let url = environment.backendUrl+"user/get/laura123"//+this.username;
+        let url = environment.backendUrl+"user/get/"+this.username;
         return new Observable((o: any) => {
             this.http.get(url, {}).subscribe((data) => {
                 o.next(data);
@@ -46,6 +47,19 @@ export class UserService {
             });
         });
       
+    }
+
+    editUser(userDto : UserDto){
+        let url = environment.backendUrl+"user/update";
+        return new Observable((o: any) => {
+            this.http.post(url, userDto).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
     }
 
 }

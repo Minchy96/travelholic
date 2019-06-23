@@ -1,0 +1,7 @@
+package pmf.mina.bjelica.travelholic.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CountryRepo extends JpaRepository<T, ID> {
+
+}

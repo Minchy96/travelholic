@@ -8,46 +8,38 @@
 
                 <h1 class="title">{{user?.firstName}} {{user?.lastName}}</h1>
                 <p class="category">zanimanje ?!</p>
-                <div class="content">
-                    <div class="social-description">
 
-                        <p>Posts </p>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
+
+
 
     <div class="section">
         <div class="container">
             <div class="button-container">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary btn-round btn-lg" (click)="seeAbout()">
+                    About
+                </button>
+                <button type="button" class="btn btn-primary btn-round btn-lg" data-toggle="modal"
+                    data-target="#exampleModal">
                     Add Post
                 </button>
 
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary btn-round btn-lg" (click)="seeEditProfile()">
                     Edit Profile
                 </button>
 
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary btn-round btn-lg" (click)="posts()">
                     See Posts
                 </button>
             </div>
-        </div>
-    </div>
 
-    <div class="section">
-        <div class="container">
-            <h3 class="title">About me</h3>
-            <h5 class="description">{{ user?.caption  }}</h5>
-            <h3 class="title">Date of birth</h3>
-            <h5 class="description">{{ user?.birthDate  }}</h5>
-            <h3 class="title">Email Address</h3>
-            <h5 class="description">{{ user?.email  }}</h5>
-            <h3 class="title">Address</h3>
-            <h5 class="description">{{ user?.address  }}</h5> <br>
 
+
+            <app-about *ngIf="about"> </app-about>
+            <app-edit-profile *ngIf="editProfile"></app-edit-profile>
+            <app-see-posts *ngIf="seePosts"></app-see-posts>
 
 
 
@@ -64,31 +56,39 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <input type="email" class="form-control" id="titlePost" placeholder="Title">
-                                <textarea class="form-control" aria-label="With textarea"
-                                    placeholder="Description..."></textarea> <br>
+                            <form [formGroup]="newPostForm">
+                                <input type="text" class="form-control" id="titlePost" placeholder="Title"
+                                    formControlName="title">
+                                <textarea class="form-control" aria-label="With textarea" placeholder="Description..."
+                                    formControlName="description"></textarea> <br>
+                                <input type="text" class="form-control" id="titlePost" placeholder="Amount"
+                                    formControlName="amount"> <br>
 
                                 <div class="form-inline">
                                     <div class="form-group col-md-6">
                                         Start: <input class="form-control datetimepicker" placeholder="06/07/2019"
-                                            name="dp1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
+                                            name="dp1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()"
+                                            formControlName="start">
                                     </div>
                                     <div class="form-group col-md-6">
                                         End: <input class="form-control datetimepicker" placeholder="06/07/2019"
-                                            name="dp2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+                                            name="dp2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()"
+                                            formControlName="end">
                                     </div>
                                 </div><br>
 
-                                <input type="email" class="form-control" id="titlePost" placeholder="City"> <br>
-                                <input type="email" class="form-control" id="titlePost" placeholder="Zipcode"><br>
-                                <input type="email" class="form-control" id="titlePost" placeholder="Counrty">
+                                <input type="text" class="form-control" id="titlePost" placeholder="City"
+                                    formControlName="city"> <br>
+                                <input type="text" class="form-control" id="titlePost" placeholder="Zipcode"
+                                    formControlName="zipcode"><br>
+                                <input type="text" class="form-control" id="titlePost" placeholder="Counrty"
+                                    formControlName="country">
                             </form>
 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Add post</button>
+                            <button type="button" class="btn btn-primary" (click)="addPost()">Add post</button>
                         </div>
                     </div>
                 </div>
