@@ -1,9 +1,0 @@
-package pmf.mina.bjelica.travelholic.service;
-
-import pmf.mina.bjelica.travelholic.model.dto.UserDto;
-
-public interface UserService {
-
-	void save(UserDto userDto);
-
-}

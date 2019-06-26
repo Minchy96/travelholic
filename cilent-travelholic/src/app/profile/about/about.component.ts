@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+    selector: 'app-about',
+    templateUrl: './about.component.html',
+    styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
 
-    user : any
+    otherUsername: string
+    username: string
+    user: any
 
-  constructor(private userService : UserService) {
-    this.userService.getUserByUsername().subscribe(data => {
-        this.user = data
-        console.log(this.user)
-    })
-   }
+    constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
+        this.username = sessionStorage.getItem('username')
+        if (this.router.url != "/profile")
+            this.otherUsername = this.route.snapshot.paramMap.get('username');
+        else
+            this.otherUsername = this.username
 
-  ngOnInit() {
-  }
+        console.log(this.otherUsername)
+
+        this.userService.getUserByUsername(this.otherUsername).subscribe(data => {
+            this.user = data
+            console.log(this.user)
+        })
+    }
+
+    ngOnInit() {
+    }
 
 }

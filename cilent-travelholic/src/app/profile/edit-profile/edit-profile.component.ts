@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserDto } from 'src/app/model/user-dto';
+import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a } from '@angular/platform-browser-dynamic';
 
 @Component({
     selector: 'app-edit-profile',
@@ -10,6 +11,7 @@ import { UserDto } from 'src/app/model/user-dto';
 })
 export class EditProfileComponent implements OnInit {
 
+    username : string
     user: any
     userDto: UserDto
 
@@ -24,7 +26,8 @@ export class EditProfileComponent implements OnInit {
     })
 
     constructor(private userService: UserService) {
-        this.userService.getUserByUsername().subscribe(data => {
+        this.username = sessionStorage.getItem('username');
+        this.userService.getUserByUsername(this.username).subscribe(data => {
             this.user = data;
             console.log(this.user)
             this.intitValues();
@@ -49,7 +52,7 @@ export class EditProfileComponent implements OnInit {
     update() {
         this.userDto = new UserDto();
 
-        this.userDto.username = this.userService.username
+        this.userDto.username = this.username
 
         if (this.user.firstName != this.ediProfileForm.get("firstName").value)
             this.userDto.firstName = this.ediProfileForm.get("firstName").value;
@@ -85,8 +88,12 @@ export class EditProfileComponent implements OnInit {
         this.userService.editUser(this.userDto).subscribe( data => {
             console.log(data)
             if (this.userDto.newUsername != null){
-                this.userService.username = this.userDto.newUsername
-                console.log( this.userService.username)
+               // this.userService.username = this.userDto.newUsername
+               this.username =  this.ediProfileForm.get("username").value;
+               sessionStorage.setItem('username', this.username) 
+               let u = sessionStorage.getItem('username')
+               console.log("da li sma promenila", u)
+               console.log( this.username," je novi username")
             }
         })
 

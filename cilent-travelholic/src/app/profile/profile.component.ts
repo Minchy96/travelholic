@@ -3,7 +3,7 @@ import { UserService } from '../services/user-service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostDto } from '../model/post-dto';
 import { PostService } from '../services/post-service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
@@ -12,12 +12,13 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-   
+    username: string
+    otherUsername: string
     seePosts: boolean
-    about : boolean
-    editProfile : boolean
+    about: boolean
+    editProfile: boolean
     postDto: PostDto = new PostDto()
-    user : any
+    user: any
 
     newPostForm = new FormGroup({
         title: new FormControl(),
@@ -31,27 +32,33 @@ export class ProfileComponent implements OnInit {
     })
 
 
-    constructor(private userService: UserService, private postService: PostService, private router : Router) {
-        this.userService.getUserByUsername().subscribe(data => {
+    constructor(private userService: UserService, private postService: PostService, private router: Router,
+        private route: ActivatedRoute) {
+        this.username = sessionStorage.getItem('username')
+
+        if (this.router.url != "/profile")
+            this.otherUsername = this.route.snapshot.paramMap.get('username');
+        else
+            this.otherUsername = this.username
+
+        this.userService.getUserByUsername(this.otherUsername).subscribe(data => {
             this.user = data
             console.log(this.user)
         })
         console.log(this.router.url)
-        if (this.router.url == "/profile/edit"){
-            this.seeEditProfile()
-        } else {
-            this.about = true;
-            this.seePosts = false;
-            this.editProfile = false;
-        }
+
+        this.about = true;
+        this.seePosts = false;
+        this.editProfile = false;
+
     }
 
     ngOnInit() {
 
     }
 
-    seeAbout(){
-        this.userService.getUserByUsername().subscribe(data => {
+    seeAbout() {
+        this.userService.getUserByUsername(this.username).subscribe(data => {
             this.user = data
             console.log(this.user)
         })
@@ -60,20 +67,20 @@ export class ProfileComponent implements OnInit {
         this.editProfile = false;
     }
 
-    posts(){
+    posts() {
         this.about = false;
         this.seePosts = true;
         this.editProfile = false;
     }
 
-    seeEditProfile(){
+    seeEditProfile() {
         this.about = false;
-        this.seePosts =false;
+        this.seePosts = false;
         this.editProfile = true;
     }
 
     addPost() {
-        this.postDto.username = this.userService.username
+        this.postDto.username = this.username
         let startDate = this.newPostForm.get("start").value.year + "-" + this.newPostForm.get("start").value.month + "-" + this.newPostForm.get("start").value.day;
         this.postDto.start = startDate;
 

@@ -20,10 +20,9 @@ export class HomeComponent implements OnInit {
         text: new FormControl(),
     })
 
-    constructor(private postService: PostService,
-        private userService : UserService) {
+    constructor(private postService: PostService) {
         this.getAllPosts();
-        this.username = this.userService.username;
+        this.username = sessionStorage.getItem('username');
     }
 
     ngOnInit() {

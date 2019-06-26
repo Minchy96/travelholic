@@ -50,7 +50,8 @@ export class RegistrationComponent implements OnInit {
 
         this.userService.saveUser(this.userDto).subscribe(data => {
             console.log(data); 
-            this.userService.username = this.userDto.username; 
+          //  this.userService.username = this.userDto.username; 
+          sessionStorage.setItem('username', this.registrationForm.get("username").value)
             this.router.navigate(["home"]);
           } ,(err: HttpErrorResponse) => {
           });

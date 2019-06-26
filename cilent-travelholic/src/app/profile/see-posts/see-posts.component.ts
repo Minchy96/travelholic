@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user-service';
 import { PostService } from 'src/app/services/post-service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CommentDto } from 'src/app/model/comment-dto';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-see-posts',
@@ -11,7 +12,8 @@ import { CommentDto } from 'src/app/model/comment-dto';
 })
 export class SeePostsComponent implements OnInit {
 
-    username: String
+    username: string
+    otherUsername: string
     posts: any
     commentDto: CommentDto
     deleteSure: number
@@ -21,8 +23,14 @@ export class SeePostsComponent implements OnInit {
         text: new FormControl(),
     })
 
-    constructor(private userService: UserService, private postService: PostService) {
-        this.username = userService.username
+    constructor(private userService: UserService, private postService: PostService,
+        private router: Router, private route: ActivatedRoute) {
+        this.username = sessionStorage.getItem('username');
+        if (this.router.url != "/profile")
+            this.otherUsername = this.route.snapshot.paramMap.get('username');
+        else
+            this.otherUsername = this.username
+
         this.getAllPosts()
         this.deleteSure = -1;
     }
@@ -31,7 +39,7 @@ export class SeePostsComponent implements OnInit {
     }
 
     getAllPosts() {
-        this.postService.getUsersPosts(this.username).subscribe(data => {
+        this.postService.getUsersPosts(this.otherUsername).subscribe(data => {
             this.posts = data
             console.log(this.posts)
         });
@@ -64,12 +72,12 @@ export class SeePostsComponent implements OnInit {
                 console.log(data)
                 this.getAllPosts()
                 this.deleteSure = -1;
-            }) 
+            })
         } else {
             this.deleteSure = postId;
         }
     }
 
-   
+
 
 }

@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-    username : String
 
     constructor(private http: HttpClient) {
      }
@@ -35,8 +34,8 @@ export class UserService {
         });
     }
 
-    getUserByUsername(){
-        let url = environment.backendUrl+"user/get/"+this.username;
+    getUserByUsername(username){
+        let url = environment.backendUrl+"user/get/"+username;
         return new Observable((o: any) => {
             this.http.get(url, {}).subscribe((data) => {
                 o.next(data);
@@ -47,6 +46,19 @@ export class UserService {
             });
         });
       
+    }
+
+    getActiveUser(){
+        let url = environment.backendUrl+"user/get/"+sessionStorage.getItem('username');
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
     }
 
     editUser(userDto : UserDto){

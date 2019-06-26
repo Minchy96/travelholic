@@ -55,5 +55,10 @@ export class NavBarComponent implements OnInit {
         this.router.navigate(["home"]);
     }
 
+    logout(){
+        sessionStorage.removeItem('username');
+        this.router.navigate(['']);
+    }
+
    
 }

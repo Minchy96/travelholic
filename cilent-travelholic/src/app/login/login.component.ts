@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
         console.log(this.loginDto)
         this.userServce.loginUser(this.loginDto).subscribe(data => {
             if (data == "0") {
-                this.userServce.username = this.loginDto.username;
+               // this.userServce.username = this.loginDto.username;
+               sessionStorage.setItem('username', this.loginForm.get("username").value)
                 this.router.navigate(["home"]);
              } else
                 location.reload();

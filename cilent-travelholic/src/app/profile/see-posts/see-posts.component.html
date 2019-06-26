@@ -1,21 +1,23 @@
 <div *ngIf="posts">
     <div *ngFor="let post of posts" class="card">
         <div class="card-body">
-            <blockquote class="blockquote">
-                <p class="h2">{{post?.title}}</p>
-                <footer class="text-muted">{{post?.description}}</footer>
-                <footer class="text-muted">{{post?.amount}} e </footer>
-                <footer class="text-muted"> Od {{post?.start}} do {{post?.end}}</footer>
-                <footer class="text-muted"> {{post?.city.name}} , {{post?.city.country.name}} </footer>
-                <footer class="text-muted"> <a href="#">{{post.user?.firstName}} {{post?.user.lastName}} </a>
-                </footer>
-            </blockquote>
+            <div class="card">
+                <div class="card-body" style="background:rgba(0,0,0,0.01);">
+                                <p class="h2">{{post?.title}}</p>
+                                <footer class="text-muted">{{post?.description}}</footer>
+                                <footer class="text-muted">{{post?.amount}} e </footer>
+                                <footer class="text-muted"> Od {{post?.start}} do {{post?.end}}</footer>
+                                <footer class="text-muted"> {{post?.city.name}} , {{post?.city.country.name}} </footer>
+                                <footer class="text-muted"> <a [routerLink]="['/profile', post.user.username ]">{{post.user?.firstName}} {{post?.user.lastName}} </a>
+                                </footer>
+                </div>
+            </div>
             <div *ngFor="let comm of post.comments">
 
                 <div class="form-inline">
                     <div class="form-group col-md-9">
                         <footer class="blockquote-footer">
-                            {{ comm?.text }} <a href="#">{{ comm?.user.firstName }}
+                            {{ comm?.text }} <a [routerLink]="['/profile', comm.user.username ]">{{ comm?.user.firstName }}
                                 {{ comm?.user.lastName }}</a>
                         </footer>
                     </div>
