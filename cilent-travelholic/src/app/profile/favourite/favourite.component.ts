@@ -64,4 +64,11 @@ export class FavouriteComponent implements OnInit {
         })
     }
 
+    removeFavoutire(postId){
+        this.postService.removeFavourite(this.username,postId).subscribe( data => {
+            console.log(data)
+            this.getAllPosts()
+        })
+    }
+
 }

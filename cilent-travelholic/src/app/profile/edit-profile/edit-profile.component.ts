@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserDto } from 'src/app/model/user-dto';
-import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a } from '@angular/platform-browser-dynamic';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-edit-profile',
@@ -25,7 +25,8 @@ export class EditProfileComponent implements OnInit {
         caption: new FormControl(),
     })
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private router : Router, 
+        private route : ActivatedRoute) {
         this.username = sessionStorage.getItem('username');
         this.userService.getUserByUsername(this.username).subscribe(data => {
             this.user = data;
@@ -88,13 +89,11 @@ export class EditProfileComponent implements OnInit {
         this.userService.editUser(this.userDto).subscribe( data => {
             console.log(data)
             if (this.userDto.newUsername != null){
-               // this.userService.username = this.userDto.newUsername
                this.username =  this.ediProfileForm.get("username").value;
                sessionStorage.setItem('username', this.username) 
                let u = sessionStorage.getItem('username')
-               console.log("da li sma promenila", u)
-               console.log( this.username," je novi username")
             }
+            location.reload()
         })
 
 

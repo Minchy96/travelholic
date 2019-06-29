@@ -1,116 +1,128 @@
-<br><br><br><br><br>
-<div class="container text-center">
+<br><br><br>
+<div class="wrapper">
+    <div filter-color="gray">
+        <div style="background-image:url(assets/img/p6.jpg);">
+            <br><br>
+            <div class="container text-center">
 
-    <form [formGroup]="searchForm">
-        <div class="container">
-            <div class="content-center">
-                <div class="form-inline">
-                    <div class="form-group col-md-6">
-                        <p class="h4">Country</p>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <p class="h4">City</p>
-                    </div>
-                </div>
-                <div class="form-inline">
-                    <div class="form-group col-md-6">
-                        <select id="inputState" class="form-control" (ngModelChange)="cityByCountry()"
-                            formControlName="country" [(ngModel)]="searchDto.country">
-                            <option *ngFor="let country of countries" [value]="country.name">
-                                {{country.name}}</option>
-                        </select>
-                    </div>
+                <form [formGroup]="searchForm">
+                    <div class="container" style="background-color: white">
+                        <div class="content-center">
+                            <div class="form-inline">
+                                <div class="form-group col-md-6">
+                                    <p class="h4">Country</p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <p class="h4">City</p>
+                                </div>
+                            </div>
+                            <div class="form-inline">
+                                <div class="form-group col-md-6">
+                                    <select id="inputState" class="form-control" (ngModelChange)="cityByCountry()"
+                                        formControlName="country" [(ngModel)]="searchDto.country">
+                                        <option *ngFor="let country of countries" [value]="country.name">
+                                            {{country.name}}</option>
+                                    </select>
+                                </div>
 
-                    <div class="form-group col-md-6">
-                        <select id="inputState" class="form-control" formControlName="city"
-                            [(ngModel)]="searchDto.city">
-                            <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
-                        </select>
-                    </div>
-                </div>
+                                <div class="form-group col-md-6">
+                                    <select id="inputState" class="form-control" formControlName="city"
+                                        [(ngModel)]="searchDto.city">
+                                        <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                <div class="form-inline">
-                    <div class="form-group col-md-6">
-                        <p class="h4">Start</p>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <p class="h4">End</p>
-                    </div>
-                </div>
-                <div class="form-inline">
-                    <div class="form-group col-md-6">
-                        <input class="form-control datetimepicker" placeholder="06/07/2019" name="dp1" ngbDatepicker
-                            #d1="ngbDatepicker" (click)="d1.toggle()" formControlName="start"
-                            [(ngModel)]="searchDto.start">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <input class="form-control datetimepicker" placeholder="06/07/2019" name="dp2" ngbDatepicker
-                            #d2="ngbDatepicker" (click)="d2.toggle()" formControlName="end" [(ngModel)]="searchDto.end">
-                    </div>
-                </div><br>
-                <div>
-                    <button type="submit" class="btn btn-primary btn-round" (click)="search()">Search</button>
-                    <button type="submit" class="btn btn-primary btn-round" (click)="getAllPosts()">See
-                        All</button><br><br>
-                </div>
-            </div>
-        </div>
-    </form>
-
-</div>
-<div class="container">
-    <div class="row justify-content-center">
-        <div *ngFor="let post of posts" class="card">
-            <div class="card-body">
-                <div class="card">
-                    <div class="card-body" style="background:rgba(0,0,0,0.01);">
-                        <p class="h2">{{post.title}}</p>
-                        <footer class="text-muted">{{post.description}}</footer>
-                        <footer class="text-muted">{{post.amount}} e </footer>
-                        <footer class="text-muted"> Od {{post.start}} do {{post.end}}</footer>
-                        <footer class="text-muted"> {{post.city.name}} , {{post.city.country.name}} </footer>
-                        <footer class="text-muted"> <a
-                                [routerLink]="['/profile', post.user.username ]">{{post.user.firstName}}
-                                {{post.user.lastName}} </a>
-                        </footer>
-                        <div *ngIf="username != post.user.username">
-                            <button type="button" class="btn btn-neutral"  (click)="favoutire(post.id)">
-                                    <i class="now-ui-icons objects_diamond"></i> Add to Favourite</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngFor="let comm of post.comments">
-
-                    <div class="form-inline">
-                        <div class="form-group col-md-9">
-                            <footer class="blockquote-footer">
-                                {{ comm.text }} <a
-                                    [routerLink]="['/profile', comm.user.username ]">{{ comm.user.firstName }}
-                                    {{ comm.user.lastName }}</a>
-                            </footer>
-                        </div>
-
-
-                        <div *ngIf="comm.user.username === username" class="form-group col-md-3">
-                            <i class="now-ui-icons ui-1_simple-remove" (click)="removeComm(comm.id)"></i>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <form [formGroup]="commentForm">
-                    <div class="form-inline">
-                        <div class="form-group col-md-9">
-                            <input type="text" class="form-control" id="inputComm" placeholder="Comment"
-                                formControlName="text">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <button type="submit" class="btn btn-primary btn-round"
-                                (click)="addComment(post.id)">Comment</button>
+                            <div class="form-inline">
+                                <div class="form-group col-md-6">
+                                    <p class="h4">Start</p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <p class="h4">End</p>
+                                </div>
+                            </div>
+                            <div class="form-inline">
+                                <div class="form-group col-md-6">
+                                    <input class="form-control datetimepicker" placeholder="06/07/2019" name="dp1"
+                                        ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" formControlName="start"
+                                        [(ngModel)]="searchDto.start">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input class="form-control datetimepicker" placeholder="06/07/2019" name="dp2"
+                                        ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" formControlName="end"
+                                        [(ngModel)]="searchDto.end">
+                                </div>
+                            </div><br>
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-round btn-lg"
+                                    (click)="search()">Search</button>
+                                <button type="submit" class="btn btn-primary btn-round btn-lg"
+                                    (click)="getAllPosts()">See
+                                    All</button><br><br>
+                            </div>
                         </div>
                     </div>
                 </form>
+
+            </div>
+            <br><br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div *ngFor="let post of posts" class="card">
+                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-body" style="background:rgba(0,0,0,0.01);">
+                                    <p class="h2">{{post.title}}</p>
+                                    <footer class="lead">{{post.description}}</footer>
+                                    <footer class="lead"> {{post.amount}} e</footer>
+                                    <footer class="lead"> Od {{post.start}} do {{post.end}}</footer>
+                                    <footer class="lead"> {{post.city.name}} , {{post.city.country.name}} </footer>
+                                    <footer class="lead"> <a
+                                            [routerLink]="['/profile', post.user.username ]">{{post.user.firstName}}
+                                            {{post.user.lastName}} </a>
+                                    </footer>
+                                    <div *ngIf="username != post.user.username">
+                                        <button type="button" class="btn btn-neutral btn-lg"
+                                            (click)="favoutire(post.id)">
+                                            <i class="now-ui-icons objects_diamond"></i> Add to Favourite</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngFor="let comm of post.comments">
+
+                                <div class="form-inline">
+                                    <div class="form-group col-md-9">
+                                        <footer class="lead">
+                                            - {{ comm.text }} <a
+                                                [routerLink]="['/profile', comm.user.username ]">{{ comm.user.firstName }}
+                                                {{ comm.user.lastName }}</a>
+                                        </footer>
+                                    </div>
+
+
+                                    <div *ngIf="comm.user.username === username" class="form-group col-md-3">
+                                        <i class="now-ui-icons ui-1_simple-remove" (click)="removeComm(comm.id)"></i>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <form [formGroup]="commentForm">
+                                <div class="form-inline">
+                                    <div class="form-group col-md-9 input-lg">
+                                        <input type="text" class="form-control" id="inputComm" placeholder="Comment"
+                                            formControlName="text">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <button type="submit" class="btn btn-primary btn-round btn-lg"
+                                            (click)="addComment(post.id)">Comment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

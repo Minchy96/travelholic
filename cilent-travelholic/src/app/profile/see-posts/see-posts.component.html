@@ -16,14 +16,14 @@
 
                 <div class="form-inline">
                     <div class="form-group col-md-9">
-                        <footer class="blockquote-footer">
-                            {{ comm?.text }} <a [routerLink]="['/profile', comm.user.username ]">{{ comm?.user.firstName }}
+                        <footer class="text-muted">
+                           - {{ comm?.text }} <a [routerLink]="['/profile', comm.user.username ]">{{ comm?.user.firstName }}
                                 {{ comm?.user.lastName }}</a>
                         </footer>
                     </div>
 
 
-                    <i class="now-ui-icons ui-1_simple-remove" (click)="removeComm(comm.id)"></i>
+                    <i class="now-ui-icons ui-1_simple-remove" *ngIf="username == otherUsername || username == comm.user.username" (click)="removeComm(comm.id)"></i>
 
                 </div>
 
@@ -43,7 +43,7 @@
         
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-            (click)="deletePost(post.id)" >
+            (click)="deletePost(post.id)" *ngIf="username == otherUsername ">
                 Delete
             </button>
 

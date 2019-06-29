@@ -128,4 +128,17 @@ export class PostService {
             });
         });
     }
+
+    removeFavourite(username, postId){
+        let url = environment.backendUrl + "post/removeFavourite/"+username+"/"+postId;
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
+    }
 }

@@ -7,14 +7,12 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentsModule } from './components/components.module';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { CreatePostComponent } from './create-post/create-post.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './profile/about/about.component';
 import { SeePostsComponent } from './profile/see-posts/see-posts.component';
@@ -29,7 +27,6 @@ import { FavouriteComponent } from './profile/favourite/favourite.component';
     ProfileComponent,
     RegistrationComponent,
     HomeComponent,
-    CreatePostComponent,
     LoginComponent,
     AboutComponent,
     SeePostsComponent,
@@ -43,9 +40,8 @@ import { FavouriteComponent } from './profile/favourite/favourite.component';
     RouterModule ,
     AppRoutingModule,
     BrowserModule,
-    ComponentsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
