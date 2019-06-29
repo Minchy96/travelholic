@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { CommentDto } from '../model/comment-dto';
 import { PostDto } from '../model/post-dto';
+import { SearchDto } from '../model/search-dto';
 
 
 @Injectable({
@@ -85,6 +86,45 @@ export class PostService {
                 return o.complete();
             }, (err) => {
                 return o.console.error(err);
+            });
+        });
+    }
+
+    getPostsWithFilters(searchDto : SearchDto) {
+        let url = environment.backendUrl + "post/search";
+        return new Observable((o: any) => {
+            this.http.post(url, searchDto).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
+    }
+
+    addFavourite(username, postId){
+        let url = environment.backendUrl + "post/favourite/"+username+"/"+postId;
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
+    }
+
+    getFavouritePosts(username){
+        let url = environment.backendUrl + "post/getFavourite/"+username;
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
             });
         });
     }

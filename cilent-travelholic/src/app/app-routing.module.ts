@@ -27,12 +27,7 @@ const routes: Routes = [
     {
         path: "profile",
         component: ProfileComponent,
-        children: [
-            {
-                path: "edit",
-                component: EditProfileComponent
-            },
-        ] 
+      
     },
     {
         path: 'profile/:username', component: ProfileComponent

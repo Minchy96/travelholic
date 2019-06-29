@@ -74,4 +74,17 @@ export class UserService {
         });
     }
 
+    tryUsername(username){
+        let url = environment.backendUrl+"user/try/"+username;
+        return new Observable((o: any) => {
+            this.http.get(url, {}).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
+    }
+
 }

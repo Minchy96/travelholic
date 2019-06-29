@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
 
     userDto: UserDto
-    dateBirth : String;
+    dateBirth: String;
+    tryUsername: any
 
     constructor(private userService: UserService,
         private router: Router) { }
@@ -37,26 +38,42 @@ export class RegistrationComponent implements OnInit {
         this.userDto.firstName = this.registrationForm.get("firstName").value;
         this.userDto.lastName = this.registrationForm.get("lastName").value;
         this.userDto.password = this.registrationForm.get("password").value;
-        this.userDto.username = this.registrationForm.get("username").value;
         this.userDto.address = this.registrationForm.get("address").value;
         this.userDto.caption = this.registrationForm.get("caption").value;
         this.userDto.email = this.registrationForm.get("email").value;
+        this.userDto.username = this.registrationForm.get("username").value;
 
-        let dateBirth = this.registrationForm.get("birthDate").value.year+"-"+this.registrationForm.get("birthDate").value.month+"-"+this.registrationForm.get("birthDate").value.day;
+        let dateBirth = this.registrationForm.get("birthDate").value.year + "-" + this.registrationForm.get("birthDate").value.month + "-" + this.registrationForm.get("birthDate").value.day;
         this.userDto.birthDate = dateBirth;
 
+        let username = this.registrationForm.get('username').value
+        this.userService.tryUsername(username).subscribe(data => {
+            console.log(data)
+        })
+
+       
         console.log(this.userDto)
-        
+
 
         this.userService.saveUser(this.userDto).subscribe(data => {
-            console.log(data); 
-          //  this.userService.username = this.userDto.username; 
-          sessionStorage.setItem('username', this.registrationForm.get("username").value)
+            console.log(data);
+            sessionStorage.setItem('username', this.registrationForm.get("username").value)
             this.router.navigate(["home"]);
-          } ,(err: HttpErrorResponse) => {
-          });
-    } 
-    
+        }, (err: HttpErrorResponse) => {
+        });
+    }
+
+  /*  sreditiOvo() {
+        let usernameTemp = this.registrationForm.get('username').value
+        this.userService.tryUsername(usernameTemp).subscribe(data => {
+            this.tryUsername = data
+            if (this.tryUsername == "true"){
+                this.userDto.username = this.registrationForm.get("username").value;
+            }
+            
+        })
+    } */
+
 
 
 }

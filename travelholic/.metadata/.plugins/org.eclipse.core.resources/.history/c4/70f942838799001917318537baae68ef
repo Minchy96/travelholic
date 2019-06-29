@@ -1,0 +1,43 @@
+package pmf.mina.bjelica.travelholic.dao;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import pmf.mina.bjelica.travelholic.model.dto.SearchDto;
+import pmf.mina.bjelica.travelholic.model.entity.Post;
+
+@Transactional
+@Repository
+public class PostRepositoryImpl implements PostRepositoryCustom {
+
+	@PersistenceContext
+	EntityManager entityManager;
+
+	@Override
+	public List<Post> filterPosts(SearchDto searchDto) {
+		List<Post> posts ;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date start=null,end=null;
+		try {
+			start = (Date) sdf.parse(searchDto.getStart());
+			end = (Date) sdf.parse(searchDto.getEnd());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+		return posts;
+	}
+
+}

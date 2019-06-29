@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './profile/about/about.component';
 import { SeePostsComponent } from './profile/see-posts/see-posts.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { FavouriteComponent } from './profile/favourite/favourite.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     AboutComponent,
     SeePostsComponent,
     EditProfileComponent,
+    FavouriteComponent,
   ],
   imports: [
     BrowserAnimationsModule,

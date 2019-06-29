@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
     seePosts: boolean
     about: boolean
     editProfile: boolean
+    favourite : boolean
     postDto: PostDto = new PostDto()
     user: any
 
@@ -50,6 +51,7 @@ export class ProfileComponent implements OnInit {
         this.about = true;
         this.seePosts = false;
         this.editProfile = false;
+        this.favourite = false;
 
     }
 
@@ -65,18 +67,28 @@ export class ProfileComponent implements OnInit {
         this.about = true;
         this.seePosts = false;
         this.editProfile = false;
+        this.favourite = false;
     }
 
     posts() {
         this.about = false;
         this.seePosts = true;
         this.editProfile = false;
+        this.favourite = false;
     }
 
     seeEditProfile() {
         this.about = false;
         this.seePosts = false;
         this.editProfile = true;
+        this.favourite = false;
+    }
+    
+    seeFavourite(){
+        this.about = false;
+        this.seePosts = false;
+        this.editProfile = false;
+        this.favourite = true;
     }
 
     addPost() {

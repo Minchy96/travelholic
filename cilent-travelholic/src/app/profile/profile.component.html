@@ -32,6 +32,10 @@
                 <button type="button" class="btn btn-primary btn-round btn-lg" (click)="posts()">
                     See Posts
                 </button>
+
+                <button type="button" *ngIf="otherUsername == username" class="btn btn-primary btn-round btn-lg" (click)="seeFavourite()">
+                    Favourite posts
+                </button>
             </div>
 
 
@@ -39,6 +43,7 @@
             <app-about *ngIf="about"> </app-about>
             <app-edit-profile *ngIf="editProfile"></app-edit-profile>
             <app-see-posts *ngIf="seePosts"></app-see-posts>
+            <app-favourite *ngIf="favourite"></app-favourite>
 
 
 
