@@ -31,4 +31,5 @@ export class AboutComponent implements OnInit {
     ngOnInit() {
     }
 
+   
 }

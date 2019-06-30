@@ -69,8 +69,9 @@
                     </div>
 
                 </div><br>
+                <span *ngIf="uniqueUsername == false" class="badge badge-danger">Username must be unique </span> <br>
 
-                <button type="submit" class="btn btn-primary btn-round btn-lg" (click)="saveUser()">Create
+                <button type="submit" class="btn btn-primary btn-round btn-lg" (click)="testUsername()">Create
                     account</button><br>
                 Already have an account?
                 <button type="submit" class="btn btn-primary btn-round btn-lg" [routerLink]="['']"

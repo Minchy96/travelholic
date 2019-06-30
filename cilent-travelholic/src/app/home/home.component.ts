@@ -92,19 +92,14 @@ export class HomeComponent implements OnInit {
         } else {
             this.searchDto.start = null;
         }
-
         if (this.searchForm.get("end").value != null) {
             let end = this.searchForm.get("end").value.year + "-" + this.searchForm.get("end").value.month + "-" + this.searchForm.get("end").value.day;
             this.searchDto.end = end;
         } else {
             this.searchDto.end = null;
         }
-
-        console.log(this.searchDto, "promenjen datum")
         this.postService.getPostsWithFilters(this.searchDto).subscribe(data => {
             this.posts = data
-            console.log(data)
-          //  this.searchForm.reset()
         })
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserDto } from '../model/user-dto';
 import { UserService } from '../services/user-service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -14,10 +14,11 @@ export class RegistrationComponent implements OnInit {
 
     userDto: UserDto
     dateBirth: String;
-    tryUsername: any
+    uniqueUsername: boolean
 
-    constructor(private userService: UserService,
-        private router: Router) { }
+    constructor(private userService: UserService, private router: Router) {
+        this.uniqueUsername = true;
+    }
 
     ngOnInit() {
     }
@@ -51,7 +52,7 @@ export class RegistrationComponent implements OnInit {
             console.log(data)
         })
 
-       
+
         console.log(this.userDto)
 
 
@@ -63,16 +64,18 @@ export class RegistrationComponent implements OnInit {
         });
     }
 
-  /*  sreditiOvo() {
+    testUsername() {
         let usernameTemp = this.registrationForm.get('username').value
         this.userService.tryUsername(usernameTemp).subscribe(data => {
-            this.tryUsername = data
-            if (this.tryUsername == "true"){
-                this.userDto.username = this.registrationForm.get("username").value;
+            if (data == true) {
+                this.uniqueUsername = true
+                this.saveUser()
+            } else {
+                this.uniqueUsername = false
+                this.registrationForm.get('username').setValue('')
             }
-            
         })
-    } */
+    }
 
 
 
