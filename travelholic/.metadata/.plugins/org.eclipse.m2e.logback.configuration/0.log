@@ -7223,3 +7223,17 @@ org.eclipse.core.runtime.CoreException: Launch configuration TravelholicApplicat
 2019-07-01 00:42:18,734 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2019-07-01 00:42:18,735 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Novica\git\boot_init\src\test\resources
 2019-07-01 00:45:30,473 [Worker-5: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2019-07-01 09:04:38,630 [Worker-5: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2019-07-01 16:48:56,624 [Worker-7: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2019-07-01 16:52:34,465 [Worker-6: Launching TravelholicApplication (3)] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-01 16:52:34,477 [Worker-6: Launching TravelholicApplication (3)] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-07-01 16:52:34,511 [Worker-6: Launching TravelholicApplication (3)] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-01 16:52:34,516 [Worker-6: Launching TravelholicApplication (3)] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-01 16:52:34,517 [Worker-6: Launching TravelholicApplication (3)] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Novica\git\boot_init\src\test\resources
+2019-07-01 16:52:44,715 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-01 16:52:44,721 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-07-01 16:52:44,727 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-07-01 16:52:44,731 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-07-01 16:52:44,731 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Novica\git\boot_init\src\test\resources
+2019-07-01 16:53:52,587 [Worker-3: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2019-07-02 09:15:09,202 [Worker-4: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
