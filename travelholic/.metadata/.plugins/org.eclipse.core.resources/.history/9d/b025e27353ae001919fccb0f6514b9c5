@@ -1,0 +1,9 @@
+package pmf.mina.bjelica.travelholic.service;
+
+import org.springframework.core.io.Resource;
+
+public interface ImageService {
+
+	Resource downloadFile(String filename);
+
+}

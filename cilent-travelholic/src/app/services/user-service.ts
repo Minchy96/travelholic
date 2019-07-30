@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserDto } from '../model/user-dto';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { LoginDto } from '../model/login-dto';
@@ -13,16 +13,16 @@ export class UserService {
 
 
     constructor(private http: HttpClient) {
-     }
-
-    saveUser(userDto : UserDto){
-        let url = environment.backendUrl+"user/save";
-        return this.http.post<any>(url, userDto);
-      
     }
 
-    loginUser(loginDto : LoginDto){
-        let url = environment.backendUrl+"user/login";
+    saveUser(userDto: UserDto) {
+        let url = environment.backendUrl + "user/save";
+        return this.http.post<any>(url, userDto);
+
+    }
+
+    loginUser(loginDto: LoginDto) {
+        let url = environment.backendUrl + "user/login";
         return new Observable((o: any) => {
             this.http.post(url, loginDto).subscribe((data) => {
                 o.next(data);
@@ -34,8 +34,8 @@ export class UserService {
         });
     }
 
-    getUserByUsername(username){
-        let url = environment.backendUrl+"user/get/"+username;
+    getUserByUsername(username) {
+        let url = environment.backendUrl + "user/get/" + username;
         return new Observable((o: any) => {
             this.http.get(url, {}).subscribe((data) => {
                 o.next(data);
@@ -45,11 +45,11 @@ export class UserService {
 
             });
         });
-      
+
     }
 
-    getActiveUser(){
-        let url = environment.backendUrl+"user/get/"+sessionStorage.getItem('username');
+    getActiveUser() {
+        let url = environment.backendUrl + "user/get/" + sessionStorage.getItem('username');
         return new Observable((o: any) => {
             this.http.get(url, {}).subscribe((data) => {
                 o.next(data);
@@ -61,8 +61,8 @@ export class UserService {
         });
     }
 
-    editUser(userDto : UserDto){
-        let url = environment.backendUrl+"user/update";
+    editUser(userDto: UserDto) {
+        let url = environment.backendUrl + "user/update";
         return new Observable((o: any) => {
             this.http.post(url, userDto).subscribe((data) => {
                 o.next(data);
@@ -74,8 +74,8 @@ export class UserService {
         });
     }
 
-    tryUsername(username){
-        let url = environment.backendUrl+"user/try/"+username;
+    tryUsername(username) {
+        let url = environment.backendUrl + "user/try/" + username;
         return new Observable((o: any) => {
             this.http.get(url, {}).subscribe((data) => {
                 o.next(data);
@@ -87,6 +87,27 @@ export class UserService {
         });
     }
 
-   
+    pushFileToStorage(file: File, username): Observable<HttpEvent<{}>> {
+        const formdata: FormData = new FormData();
+     
+        formdata.append('file', file);
+        let url = environment.backendUrl+"user/uploadImage/"+username;
+        const req = new HttpRequest('POST', url, formdata, {
+          reportProgress: true,
+          responseType: 'text'
+        });
+     
+        return this.http.request(req);
+      }
+
+
+   getImage(image) : Observable<any>{
+        let url = environment.backendUrl + "user/getImage/" + image;
+
+        return this.http.get(url, {
+            observe: 'body',
+            responseType: 'text',
+        });
+    } 
 
 }

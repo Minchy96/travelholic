@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserDto } from '../model/user-dto';
 import { UserService } from '../services/user-service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-    userDto: UserDto
+    userDto: UserDto;
     dateBirth: String;
-    uniqueUsername: boolean
+    uniqueUsername: boolean;
+    selectedImage: File = null;
+    image: any
 
     constructor(private userService: UserService, private router: Router) {
         this.uniqueUsername = true;
@@ -34,6 +36,17 @@ export class RegistrationComponent implements OnInit {
         caption: new FormControl(),
     })
 
+    onFileChange(event) {
+        this.selectedImage = event.target.files[0];
+        console.log(this.selectedImage)
+        const fd = new FormData();
+        fd.append("file", this.selectedImage);
+        console.log(fd, "a fd tako izgleda")
+
+        //    this.userService.pushFileToStorage(this.selectedImage).subscribe(data =>
+        //      console.log(data));
+    }
+
     saveUser() {
         this.userDto = new UserDto();
         this.userDto.firstName = this.registrationForm.get("firstName").value;
@@ -47,8 +60,9 @@ export class RegistrationComponent implements OnInit {
         let dateBirth = this.registrationForm.get("birthDate").value.year + "-" + this.registrationForm.get("birthDate").value.month + "-" + this.registrationForm.get("birthDate").value.day;
         this.userDto.birthDate = dateBirth;
 
-        let username = this.registrationForm.get('username').value
+        let username = this.registrationForm.get('username').value;
         this.userService.tryUsername(username).subscribe(data => {
+
             console.log(data)
         })
 
@@ -58,6 +72,9 @@ export class RegistrationComponent implements OnInit {
 
         this.userService.saveUser(this.userDto).subscribe(data => {
             console.log(data);
+            this.userService.pushFileToStorage(this.selectedImage, this.userDto.username).subscribe(data => {
+                console.log(data)
+            });
             sessionStorage.setItem('username', this.registrationForm.get("username").value)
             this.router.navigate(["home"]);
         }, (err: HttpErrorResponse) => {
@@ -76,6 +93,9 @@ export class RegistrationComponent implements OnInit {
             }
         })
     }
+
+
+
 
 
 

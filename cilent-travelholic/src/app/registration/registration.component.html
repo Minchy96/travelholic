@@ -40,7 +40,7 @@
                         <div class="input-group form-group-no-border input-lg"
                             [ngClass]="{'input-group-focus':focus===true}">
                             <input type="username" class="form-control" id="inputUsername" placeholder="Username"
-                             formControlName="username">
+                                formControlName="username">
                         </div>
                     </div>
 
@@ -67,6 +67,13 @@
                         <textarea class="form-control" aria-label="With textarea" formControlName="caption"
                             placeholder="Caption"></textarea>
                     </div>
+                    <div class="input-group form-group-no-border input-lg"
+                        [ngClass]="{'input-group-focus':focus===true}">
+                        <input style="display: none" type="file" (change)="onFileChange($event)" #fileInput>
+                        <button type="submit" class="btn btn-primary btn-round" (click)="fileInput.click()"> Pick
+                            image</button>
+                    </div>
+
 
                 </div><br>
                 <span *ngIf="uniqueUsername == false" class="badge badge-danger">Username must be unique </span> <br>
@@ -76,6 +83,8 @@
                 Already have an account?
                 <button type="submit" class="btn btn-primary btn-round btn-lg" [routerLink]="['']"
                     routerLinkActive="router-link-active">Login</button>
+
+
             </form>
         </div>
     </div>

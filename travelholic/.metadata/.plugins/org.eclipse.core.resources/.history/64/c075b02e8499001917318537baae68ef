@@ -1,5 +1,0 @@
-package pmf.mina.bjelica.travelholic.dao;
-
-public interface PostRepositoryCustom {
-
-}

@@ -5,9 +5,9 @@
         </div>
         <div class="container">
             <div class="content-center">
-
+                <img [src]="image" *ngIf="image"  class="rounded-circle"
+                     alt="" width="280px" height="300px">
                 <h1 class="title">{{user?.firstName}} {{user?.lastName}}</h1>
-        <!--        <p class="category">zanimanje ?!</p>     -->
 
             </div>
         </div>

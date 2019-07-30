@@ -11,9 +11,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class EditProfileComponent implements OnInit {
 
-    username : string
+    username: string
     user: any
     userDto: UserDto
+    selectedImage: File
 
     ediProfileForm = new FormGroup({
         email: new FormControl(),
@@ -25,8 +26,8 @@ export class EditProfileComponent implements OnInit {
         caption: new FormControl(),
     })
 
-    constructor(private userService: UserService, private router : Router, 
-        private route : ActivatedRoute) {
+    constructor(private userService: UserService, private router: Router,
+        private route: ActivatedRoute) {
         this.username = sessionStorage.getItem('username');
         this.userService.getUserByUsername(this.username).subscribe(data => {
             this.user = data;
@@ -48,6 +49,15 @@ export class EditProfileComponent implements OnInit {
 
 
     ngOnInit() {
+    }
+
+    onFileChange(event) {
+        this.selectedImage = event.target.files[0];
+        console.log(this.selectedImage)
+
+        this.userService.pushFileToStorage(this.selectedImage,this.username).subscribe(data =>
+            console.log(data));
+            location.reload()
     }
 
     update() {
@@ -86,12 +96,12 @@ export class EditProfileComponent implements OnInit {
 
         console.log(this.userDto)
 
-        this.userService.editUser(this.userDto).subscribe( data => {
+        this.userService.editUser(this.userDto).subscribe(data => {
             console.log(data)
-            if (this.userDto.newUsername != null){
-               this.username =  this.ediProfileForm.get("username").value;
-               sessionStorage.setItem('username', this.username) 
-               let u = sessionStorage.getItem('username')
+            if (this.userDto.newUsername != null) {
+                this.username = this.ediProfileForm.get("username").value;
+                sessionStorage.setItem('username', this.username)
+                let u = sessionStorage.getItem('username')
             }
             location.reload()
         })

@@ -17,9 +17,10 @@ export class ProfileComponent implements OnInit {
     seePosts: boolean
     about: boolean
     editProfile: boolean
-    favourite : boolean
+    favourite: boolean
     postDto: PostDto = new PostDto()
     user: any
+    image: any
 
     newPostForm = new FormGroup({
         title: new FormControl(),
@@ -45,7 +46,14 @@ export class ProfileComponent implements OnInit {
         this.userService.getUserByUsername(this.otherUsername).subscribe(data => {
             this.user = data
             console.log(this.user)
+            if (this.user.imageName != null) {
+                this.userService.getImage(this.user.imageName).subscribe(data => {
+                    this.image = data
+                    console.log(data)
+                })
+            }
         })
+
         console.log(this.router.url)
 
         this.about = true;
@@ -83,8 +91,8 @@ export class ProfileComponent implements OnInit {
         this.editProfile = true;
         this.favourite = false;
     }
-    
-    seeFavourite(){
+
+    seeFavourite() {
         this.about = false;
         this.seePosts = false;
         this.editProfile = false;

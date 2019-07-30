@@ -1,0 +1,46 @@
+package pmf.mina.bjelica.travelholic.service;
+
+
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import pmf.mina.bjelica.travelholic.model.FileResponse;
+import pmf.mina.bjelica.travelholic.service.storage.StorageService;
+
+@Service
+public class ImageServiceImpl implements ImageService {
+
+	
+	public ImageServiceImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	private StorageService storageService;
+
+    public ImageServiceImpl(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
+  
+    @Override
+    public Resource downloadFile(String filename) {
+        return  storageService.loadAsResource(filename);
+    }
+    
+    @Override
+    public FileResponse uploadFile(MultipartFile file) {
+        String name = storageService.store(file);
+
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(name)
+                .toUriString();
+
+        return new FileResponse(name, uri, file.getContentType(), file.getSize());
+    }
+
+   
+}

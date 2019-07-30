@@ -10,6 +10,7 @@ export class UserDto {
     caption : String
     newUsername : String
 
-    constructor(){}
+    constructor(){
+    }
 
 }
