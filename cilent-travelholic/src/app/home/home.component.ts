@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     searchDto: SearchDto
     cities: any
     countries: any
+    postImages: Array<any>;
 
     commentForm = new FormGroup({
         text: new FormControl(),
@@ -32,7 +33,8 @@ export class HomeComponent implements OnInit {
         end: new FormControl(),
     })
 
-    constructor(private postService: PostService, private searchService: SearchService) {
+    constructor(private postService: PostService, private searchService: SearchService,
+        private userService: UserService) {
         this.getAllPosts();
         this.username = sessionStorage.getItem('username');
         this.searchDto = new SearchDto()
@@ -51,10 +53,28 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
     }
 
+    getImages(){
+        for (let i = 0; i < this.posts.length; i++) {
+            let post = this.posts[i]
+            if (post.imageName != null ) {
+                this.postService.getImage(post.imageName).subscribe(response => {
+                    this.postImages[i] = response;
+                })
+            } else {
+                this.postImages[i] = null;
+            }
+        }
+
+        console.log("slike", this.postImages)
+    }
+
     getAllPosts() {
         this.postService.getPosts().subscribe(data => {
             this.posts = data
-            console.log(this.posts)
+            this.postImages = new Array()
+
+            this.getImages()
+           console.log("postovi", this.posts)
             this.searchForm.reset()
             this.searchService.getCities().subscribe(data => {
                 this.cities = data
@@ -100,6 +120,7 @@ export class HomeComponent implements OnInit {
         }
         this.postService.getPostsWithFilters(this.searchDto).subscribe(data => {
             this.posts = data
+            this.getImages()
         })
     }
 
@@ -110,8 +131,8 @@ export class HomeComponent implements OnInit {
             this.cities = data
         })
     }
-    favoutire(postId){
-        this.postService.addFavourite(this.username,postId).subscribe( data => {
+    favoutire(postId) {
+        this.postService.addFavourite(this.username, postId).subscribe(data => {
             console.log(data)
         })
     }

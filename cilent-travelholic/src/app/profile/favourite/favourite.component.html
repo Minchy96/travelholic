@@ -1,8 +1,10 @@
-<div *ngFor="let post of favPosts" class="card">
+<div *ngFor="let post of favPosts; let i=index" class="card">
         <div class="card-body">
             <div class="card">
                 <div class="card-body" style="background:rgba(0,0,0,0.01);">
                                 <p class="h2">{{post?.title}}</p>
+                                <img src="{{postImages[i]}}" *ngIf="postImages[i]" 
+                                alt="" width="auto" height="200px">
                                 <footer class="text-muted">{{post?.description}}</footer>
                                 <footer class="text-muted">{{post?.amount}} e </footer>
                                 <footer class="text-muted"> Od {{post?.start}} do {{post?.end}}</footer>

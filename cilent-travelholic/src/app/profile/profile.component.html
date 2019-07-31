@@ -5,8 +5,7 @@
         </div>
         <div class="container">
             <div class="content-center">
-                <img [src]="image" *ngIf="image"  class="rounded-circle"
-                     alt="" width="280px" height="300px">
+                <img [src]="image" *ngIf="image" class="rounded-circle" alt="" width="280px" height="300px">
                 <h1 class="title">{{user?.firstName}} {{user?.lastName}}</h1>
 
             </div>
@@ -33,7 +32,8 @@
                     See Posts
                 </button>
 
-                <button type="button" *ngIf="otherUsername == username" class="btn btn-primary btn-round btn-lg" (click)="seeFavourite()">
+                <button type="button" *ngIf="otherUsername == username" class="btn btn-primary btn-round btn-lg"
+                    (click)="seeFavourite()">
                     Favourite posts
                 </button>
             </div> <br><br><br>
@@ -87,6 +87,13 @@
                                     formControlName="zipcode"><br>
                                 <input type="text" class="form-control" id="titlePost" placeholder="Counrty"
                                     formControlName="country">
+                                <div class="input-group form-group-no-border input-lg"
+                                    [ngClass]="{'input-group-focus':focus===true}">
+                                    <input style="display: none" type="file" (change)="onFileChange($event)" #fileInput>
+                                    <button type="submit" class="btn btn-primary btn-round" (click)="fileInput.click()">
+                                        Pick
+                                        image</button>
+                                </div>
                             </form>
 
                         </div>

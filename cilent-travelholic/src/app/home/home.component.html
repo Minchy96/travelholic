@@ -72,11 +72,13 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div *ngFor="let post of posts" class="card">
+            <div *ngFor="let post of posts ; let i=index" class="card">
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body" style="background:rgba(0,0,0,0.01);">
-                            <p class="h2">{{post.title}}</p>
+                            <p class="h2">{{post.title}}</p> 
+                            <img src="{{postImages[i]}}" *ngIf="postImages[i]" 
+                     alt="" width="auto" height="230px">
                             <footer class="lead">{{post.description}}</footer>
                             <footer class="lead"> {{post.amount}} e</footer>
                             <footer class="lead"> Od {{post.start}} do {{post.end}}</footer>

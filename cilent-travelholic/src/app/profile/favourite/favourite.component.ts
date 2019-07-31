@@ -16,6 +16,7 @@ export class FavouriteComponent implements OnInit {
     otherUsername: string
     deleteSure: number
     commentDto: CommentDto
+    postImages : Array<any>
 
     commentForm = new FormGroup({
         text: new FormControl(),
@@ -40,7 +41,24 @@ export class FavouriteComponent implements OnInit {
         this.postService.getFavouritePosts(this.username).subscribe(data => {
             console.log(data)
             this.favPosts = data
+            this.getImages()
         })
+    }
+
+    getImages(){
+        this.postImages = new Array()
+        for (let i = 0; i < this.favPosts.length; i++) {
+            let post = this.favPosts[i]
+            if (post.imageName != null ) {
+                this.postService.getImage(post.imageName).subscribe(response => {
+                    this.postImages[i] = response;
+                })
+            } else {
+                this.postImages[i] = null;
+            }
+        }
+
+        console.log("slike", this.postImages)
     }
 
     addComment(postId: number) {

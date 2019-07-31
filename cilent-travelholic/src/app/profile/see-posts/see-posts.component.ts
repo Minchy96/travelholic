@@ -17,6 +17,7 @@ export class SeePostsComponent implements OnInit {
     posts: any
     commentDto: CommentDto
     deleteSure: number
+    postImages : Array<any>;
 
 
     commentForm = new FormGroup({
@@ -41,8 +42,24 @@ export class SeePostsComponent implements OnInit {
     getAllPosts() {
         this.postService.getUsersPosts(this.otherUsername).subscribe(data => {
             this.posts = data
-            console.log(this.posts)
+            this.getImages()
         });
+    }
+
+    getImages(){
+        this.postImages = new Array()
+        for (let i = 0; i < this.posts.length; i++) {
+            let post = this.posts[i]
+            if (post.imageName != null ) {
+                this.postService.getImage(post.imageName).subscribe(response => {
+                    this.postImages[i] = response;
+                })
+            } else {
+                this.postImages[i] = null;
+            }
+        }
+
+        console.log("slike", this.postImages)
     }
 
     addComment(postId: number) {

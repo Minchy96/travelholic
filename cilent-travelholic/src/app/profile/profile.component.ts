@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
     postDto: PostDto = new PostDto()
     user: any
     image: any
+    selectedImage: File
+    post : any
 
     newPostForm = new FormGroup({
         title: new FormControl(),
@@ -99,6 +101,13 @@ export class ProfileComponent implements OnInit {
         this.favourite = true;
     }
 
+    onFileChange(event) {
+        this.selectedImage = event.target.files[0];
+        console.log(this.selectedImage)
+
+       
+    }
+
     addPost() {
         this.postDto.username = this.username
         let startDate = this.newPostForm.get("start").value.year + "-" + this.newPostForm.get("start").value.month + "-" + this.newPostForm.get("start").value.day;
@@ -116,6 +125,11 @@ export class ProfileComponent implements OnInit {
         console.log(this.postDto)
         this.postService.savePost(this.postDto).subscribe(data => {
             console.log(data)
+            this.post = data
+            if (this.selectedImage != null) {
+            this.postService.pushFileToStorage(this.selectedImage,this.post.id).subscribe(data =>
+                console.log(data));
+            }
         });
         this.newPostForm.reset();
         /*   this.newPostForm.get("title").setValue("");

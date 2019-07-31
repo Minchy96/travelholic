@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { CommentDto } from '../model/comment-dto';
@@ -141,4 +141,28 @@ export class PostService {
             });
         });
     }
+
+    pushFileToStorage(file: File, id): Observable<HttpEvent<{}>> {
+        const formdata: FormData = new FormData();
+     
+        formdata.append('file', file);
+        let url = environment.backendUrl+"post/uploadImage/"+id;
+        const req = new HttpRequest('POST', url, formdata, {
+          reportProgress: true,
+          responseType: 'text'
+        });
+     
+        return this.http.request(req);
+      }
+
+
+   getImage(image) : Observable<any>{
+        let url = environment.backendUrl + "post/getImage/" + image;
+
+        return this.http.get(url, {
+            observe: 'body',
+            responseType: 'text',
+        });
+    } 
+
 }
