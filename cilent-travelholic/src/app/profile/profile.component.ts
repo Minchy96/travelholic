@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PostDto } from '../model/post-dto';
 import { PostService } from '../services/post-service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EmailDto } from '../model/email-dto';
 
 @Component({
     selector: 'app-profile',
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
     image: any
     selectedImage: File
     post : any
+    emailDto : EmailDto
 
     newPostForm = new FormGroup({
         title: new FormControl(),
@@ -33,6 +35,10 @@ export class ProfileComponent implements OnInit {
         city: new FormControl(),
         zipcode: new FormControl(),
         country: new FormControl(),
+    })
+
+    emailForm = new FormGroup({
+        text: new FormControl(),
     })
 
 
@@ -132,13 +138,17 @@ export class ProfileComponent implements OnInit {
             }
         });
         this.newPostForm.reset();
-        /*   this.newPostForm.get("title").setValue("");
-           this.newPostForm.get("description").setValue("");
-           this.newPostForm.get("start").setValue("");
-           this.newPostForm.get("end").setValue("");
-           this.newPostForm.get("city").setValue("");
-           this.newPostForm.get("zipcode").setValue("");
-           this.newPostForm.get("contry").setValue(""); */
+    }
+
+    sendEmail(){
+        this.emailDto = new EmailDto();
+        this.emailDto.toUsername = this.otherUsername;
+        this.emailDto.text = this.emailForm.get("text").value;
+        this.emailDto.fromUsername = sessionStorage.getItem('username');
+
+        this.userService.sendEmail(this.emailDto).subscribe( data =>{
+            console.log(data)
+        })
     }
 
 }

@@ -5,6 +5,7 @@ import { HttpClient, HttpEvent, HttpRequest, HttpHeaders } from '@angular/common
 import { environment } from '../../environments/environment';
 import { LoginDto } from '../model/login-dto';
 import { Observable } from 'rxjs';
+import { EmailDto } from '../model/email-dto';
 
 @Injectable({
     providedIn: 'root'
@@ -109,5 +110,18 @@ export class UserService {
             responseType: 'text',
         });
     } 
+
+    sendEmail(emailDto : EmailDto) {
+        let url = environment.backendUrl + "user/sendEmail/";
+        return new Observable((o: any) => {
+            this.http.post(url, emailDto).subscribe((data) => {
+                o.next(data);
+                return o.complete();
+            }, (err) => {
+                return o.console.error(err);
+
+            });
+        });
+    }
 
 }
